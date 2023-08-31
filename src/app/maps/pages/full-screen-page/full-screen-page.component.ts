@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Map } from 'mapbox-gl'
+import { LngLat, Map } from 'mapbox-gl'
 
 
 @Component({
@@ -12,15 +12,19 @@ export class FullScreenPageComponent implements AfterViewInit {
 
   @ViewChild('map') divmap?: ElementRef
 
+  public map?: Map
+  public zoom: number = 5.5
+  public currentLngLat?: LngLat = new LngLat(-4.17900, 40.54113)
+
   ngAfterViewInit(): void {
 
     if (!this.divmap) throw "El elemento no fue encontrado"
 
-    const map = new Map({
+    this.map = new Map({
       container: this.divmap.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
+      center: this.currentLngLat, // starting position [lng, lat]
+      zoom: this.zoom, // starting zoom
     })
   }
 }

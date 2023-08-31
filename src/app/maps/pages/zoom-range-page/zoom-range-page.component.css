@@ -5,8 +5,8 @@
 
 .floating-range {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 10px;
+  left: 10px;
   z-index: 999;
   width: 500px;
   background-color: white;
