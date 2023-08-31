@@ -42,5 +42,19 @@ export class MarkersPageComponent {
     //   .setLngLat(this.currentLngLat)
     //   .addTo(this.map)
   }
+  addMarker(lnglat: LngLat, color: string) {
+    if (!this.map) return
+    this.marker = new Marker({
+      color: color,
+      draggable: true
+    }).setLngLat(lnglat)
+      .addTo(this.map)
+  }
+  createMarker(): void {
+    if (!this.map) return
+    const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
+    const lgnlat = this.map.getCenter()
+    this.addMarker(lgnlat, color)
+  }
 
 }
