@@ -11,16 +11,47 @@ export class ZoomRangePageComponent implements AfterViewInit {
 
   @ViewChild('map') divmap?: ElementRef
 
+  public zoom: number = 10
+  public map?: Map;
+
+
   ngAfterViewInit(): void {
 
     if (!this.divmap) throw "El elemento no fue encontrado"
 
-    const map = new Map({
+    this.map = new Map({
       container: this.divmap.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
+      zoom: this.zoom, // starting zoom
     })
+    this.mapListeners()
+  }
+
+  mapListeners(): void {
+    if (!this.map) throw "Mapa no inicializado"
+
+    this.map.on("zoom", (evento) => {
+      this.zoom = this.map!.getZoom()
+    })
+
+    this.map.on("zoomend", (evento) => {
+      if (this.map!.getZoom() < 18) return
+      this.map!.zoomTo(18)
+    })
+  }
+
+  zoomIn(): void {
+    this.map!.zoomIn()
+  }
+
+  zoomOut(): void {
+    this.map!.zoomOut()
+  }
+
+  zoomChange(value: string): void {
+    this.zoom = Number(value)
+    this.map?.zoomTo(this.zoom)
   }
 
 }
