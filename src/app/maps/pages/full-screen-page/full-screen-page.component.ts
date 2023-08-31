@@ -14,7 +14,7 @@ export class FullScreenPageComponent implements AfterViewInit {
 
   public map?: Map
   public zoom: number = 5.5
-  public currentLngLat?: LngLat = new LngLat(-4.17900, 40.54113)
+  public currentLngLat: LngLat = new LngLat(-4.17900, 40.54113)
 
   ngAfterViewInit(): void {
 
