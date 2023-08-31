@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
 
-interface MenuItem {
-  route: string,
-  name: string
-}
-
 @Component({
   selector: 'maps-side-menu',
   templateUrl: './side-menu.component.html',
@@ -27,5 +22,3 @@ export class SideMenuComponent {
     },
   ]
 }
-
-
