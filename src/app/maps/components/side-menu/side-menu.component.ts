@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from '../interfaces/menu-item.interface';
 
 @Component({
   selector: 'maps-side-menu',
