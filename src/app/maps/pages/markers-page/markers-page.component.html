@@ -1,17 +1,13 @@
 <div class="map" #map></div>
 
 <ul class="list-group">
-  <li class="list-group-item">
-    Marker1
-  </li>
-  <li class="list-group-item">
-    Marker2
-  </li>
-  <li class="list-group-item">
-    Marker3
-  </li>
-  <li class="list-group-item">
-    Marker4
+  <li
+    class="list-group-item"
+    *ngFor="let colorMarker of markers; let i = index"
+    [ngStyle]="{backgroundColor: colorMarker.color}"
+    (dblclick)="deleteMarker(i)"
+  >
+    Marker {{ i + 1 }}
   </li>
 </ul>
 
