@@ -59,6 +59,10 @@ export class MarkersPageComponent {
       marker: this.marker
     })
     this.saveToLocalStorage()
+
+    this.marker.on("dragend", () => {
+      this.saveToLocalStorage()
+    })
   }
 
   createMarker(): void {
