@@ -45,6 +45,7 @@ export class MarkersPageComponent {
     //   .setLngLat(this.currentLngLat)
     //   .addTo(this.map)
   }
+
   addMarker(lnglat: LngLat, color: string) {
     if (!this.map) return
 
@@ -58,8 +59,7 @@ export class MarkersPageComponent {
     this.markers.push({
       color: color,
       marker: this.marker
-    }
-    )
+    })
   }
 
   createMarker(): void {
@@ -67,6 +67,15 @@ export class MarkersPageComponent {
     const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
     const lgnlat = this.map.getCenter()
     this.addMarker(lgnlat, color)
+  }
+
+  flyToMarker(marker: Marker): void {
+    if (!this.map) return
+    this.map.flyTo({
+      zoom: 14,
+      center: marker.getLngLat(),
+      speed: 1
+    })
   }
 
   deleteMarker(i: number): void {
