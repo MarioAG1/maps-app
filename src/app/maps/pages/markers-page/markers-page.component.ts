@@ -1,10 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Map, LngLat, Marker } from 'mapbox-gl';
+import { MarkerAndColor, PlainMarker } from '../../interfaces/markers.interface';
 
-interface MarkerAndColor {
-  color: string,
-  marker: Marker
-}
 
 @Component({
   selector: 'app-markers-page',
@@ -34,6 +31,7 @@ export class MarkersPageComponent {
       center: this.currentLngLat,
       zoom: this.zoom // starting position [lng, lat]
     })
+    this.readFromLocalStorage()
 
     // Crearla de forma estaticas
     // const markerHtml = document.createElement("div")
@@ -46,7 +44,7 @@ export class MarkersPageComponent {
     //   .addTo(this.map)
   }
 
-  addMarker(lnglat: LngLat, color: string) {
+  addMarker(color: string, lnglat: LngLat) {
     if (!this.map) return
 
     this.marker = new Marker({
@@ -65,8 +63,8 @@ export class MarkersPageComponent {
   createMarker(): void {
     if (!this.map) return
     const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
-    const lgnlat = this.map.getCenter()
-    this.addMarker(lgnlat, color)
+    const lnglat = this.map.getCenter()
+    this.addMarker(color, lnglat)
   }
 
   flyToMarker(marker: Marker): void {
@@ -76,11 +74,34 @@ export class MarkersPageComponent {
       center: marker.getLngLat(),
       speed: 1
     })
+
   }
 
   deleteMarker(i: number): void {
     this.markers[i].marker.remove()
     this.markers.splice(i, 1)
+  }
+
+  saveToLocalStorage(): void {
+    const plainMarkers: PlainMarker[] = this.markers.map(({ color, marker }) => {
+      return {
+        color,
+        lnglat: marker.getLngLat().toArray()
+      }
+    })
+    localStorage.setItem("plainMarkers", JSON.stringify(plainMarkers))
+
+  }
+
+  readFromLocalStorage(): void {
+    const plainMarkersString = localStorage.getItem("plainMarkers") ?? "[]";
+    const plainMarkers: PlainMarker[] = JSON.parse(plainMarkersString)
+
+    plainMarkers.forEach(({ color, lnglat }) => {
+      const [lng, lat] = lnglat
+      const coords = new LngLat(lng, lat)
+      this.addMarker(color, coords)
+    })
   }
 
 }
