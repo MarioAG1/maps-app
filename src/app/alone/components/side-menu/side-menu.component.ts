@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { MenuItem } from '../../interfaces/maps.interface';
+import { MenuItem } from '../../../maps/interfaces/maps.interface';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'maps-side-menu',
+  selector: 'side-menu',
+  standalone: true,
+  imports: [CommonModule,RouterLink],
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css']
 })
@@ -20,6 +24,9 @@ export class SideMenuComponent {
     },
     {
       route: "/maps/properties", name: "House"
+    },
+    {
+      route: "/alone", name: "Alone Page"
     },
   ]
 }
