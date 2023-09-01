@@ -13,13 +13,13 @@
       <!-- Houses -->
       <div class="col-4 mb-2" *ngFor="let house of houses">
         <div class="card">
-          <img src=".." class="card-img-top" alt="">
+          <map-mini-map [lngLat]="house.lngLat"></map-mini-map>
           <div class="card-body">
             <h5 class="card-title">
-              {{house.title}}
+              {{ house.title }}
             </h5>
             <p class="card-text">
-              {{house.description}}
+              {{ house.description }}
             </p>
           </div>
         </div>

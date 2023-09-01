@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Map, LngLat, Marker } from 'mapbox-gl';
-import { MarkerAndColor, PlainMarker } from '../../interfaces/markers.interface';
+import { MarkerAndColor, PlainMarker } from '../../interfaces/maps.interface';
 
 
 @Component({

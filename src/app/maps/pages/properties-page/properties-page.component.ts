@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { House } from '../../interfaces/markers.interface';
+import { House } from '../../interfaces/maps.interface';
 
 @Component({
   selector: 'app-properties-page',

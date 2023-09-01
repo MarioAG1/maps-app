@@ -1,5 +1,10 @@
 import { Marker } from "mapbox-gl";
 
+export interface MenuItem {
+  route: string,
+  name: string
+}
+
 export interface MarkerAndColor {
   color: string,
   marker: Marker
