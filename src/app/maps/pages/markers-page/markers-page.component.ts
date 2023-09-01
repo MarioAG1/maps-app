@@ -58,6 +58,7 @@ export class MarkersPageComponent {
       color: color,
       marker: this.marker
     })
+    this.saveToLocalStorage()
   }
 
   createMarker(): void {
